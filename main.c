@@ -132,21 +132,14 @@ void show_weights(tree *T)
     show_weights(T->right);
 
 }
-void neg_leaves(tree *T,tree *parent)
+void poz_leaves(tree *T,tree *parent)
 {
     if (T==NULL)
         return;
-    if ((T->left==NULL)&&(T->right==NULL)&&(T->weight==-1))
-    {
-        if (parent->left == T)
-       parent->left=NULL;
-       else
-       parent->right=NULL;
-       free(T);
-        return;
-    }
-    neg_leaves(T->left,T);
-    neg_leaves(T->right,T);
+    if ((T->left==NULL)&&(T->right==NULL)&&(T->weight>=0))
+    printf("%d(%d)\n",T->id,T->weight);
+    poz_leaves(T->left,T);
+    poz_leaves(T->right,T);
 }
 
 
@@ -162,7 +155,7 @@ void main()
       printf("2. Add element\n");
       printf("3. Delete element\n");
       printf("4. Show element weights\n");
-      printf("5. Delete leaves with negative weights\n");
+      printf("5. Show leaves with not negative weights\n");
       printf("6. Exit\n");
       scanf("%d",&n);
       switch(n)
@@ -184,7 +177,7 @@ void main()
         show_weights(T);
         break;
       case 5:
-          neg_leaves(T,NULL);
+          poz_leaves(T,NULL);
           break;
       }
   }
