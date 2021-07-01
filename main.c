@@ -101,9 +101,10 @@ void del (tree **T,int del_id)
    while (min->left!=NULL)
     min=min->left;
     printf("%d\n",min->id);
-    int t=min->id;
+    int t=min->id,w=min->weight;
    del(T,t);
    del_link->id=t;
+   del_link->weight=w;
 
 
 }
@@ -114,24 +115,16 @@ void show(tree *t, int n) {
     itoa(n*3 ,s, 10);
     char ss[] = "%";
     strcat(ss, s);
-    strcat(ss, "d\n"); //ss=Ф% число d\nФ
+    strcat(ss, "d(%d)\n"); //ss=Ф% число d\nФ
 	if (t != NULL)
     {
 		show(t->left, n + 1);
-		printf(ss, t->id);
+		printf(ss, t->id,t->weight);
 		show(t->right, n + 1);
 	}
 
 }
-void show_weights(tree *T)
-{
-    if (T==NULL)
-        return;
-    printf("%d(%d)\n",T->id,T->weight);
-    show_weights(T->left);
-    show_weights(T->right);
 
-}
 void poz_leaves(tree *T,tree *parent)
 {
     if (T==NULL)
@@ -149,14 +142,13 @@ void main()
   int N=10,id,n;
   for(int i=0;i<N;i++)
     push_tree(&T,abs(rand()%100));
-  while (n!=6)
+  while (n!=5)
   {
       printf("1. Show tree\n");
       printf("2. Add element\n");
       printf("3. Delete element\n");
-      printf("4. Show element weights\n");
-      printf("5. Show leaves with not negative weights\n");
-      printf("6. Exit\n");
+      printf("4. Show leaves with not negative weights\n");
+      printf("5. Exit\n");
       scanf("%d",&n);
       switch(n)
       {
@@ -174,9 +166,6 @@ void main()
         del(&T,id);
         break;
       case 4:
-        show_weights(T);
-        break;
-      case 5:
           poz_leaves(T,NULL);
           break;
       }

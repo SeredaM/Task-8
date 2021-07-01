@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1625157660 source:c:\users\mixa\desktop\Лабы прога\task 8\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
